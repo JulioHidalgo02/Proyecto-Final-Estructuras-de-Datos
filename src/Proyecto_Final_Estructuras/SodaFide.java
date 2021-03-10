@@ -58,42 +58,46 @@ public class SodaFide {
 
     public void LLenarPila() {
         RefrescosPila d = new RefrescosPila();
-        d.setMarca("Coca Cola");
-        d.setTipo("Gaseosa");
-        d.setCantidad(600);
-        NodoPila nuevo=new NodoPila();
-      nuevo.setElemento(d);
-      if(esVaciaP()){
-         cima=nuevo;
-      }else{
-         nuevo.setSiguiente(cima);
-         cima=nuevo;
-      }
+        d.setMarca(JOptionPane.showInputDialog(null, "Digite la marca del refresco:"));
+        d.setTipo(JOptionPane.showInputDialog(null, "Digite el tipo de refresco, ya sea gaseoso o natural:"));
+        d.setCantidad(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite el tamaño de la bebida, ya sea 500ml, 1L o 3L:")));
+        NodoPila nuevo = new NodoPila();
+        nuevo.setElemento(d);
+        if (esVaciaP()) {
+            cima = nuevo;
+        } else {
+            nuevo.setSiguiente(cima);
+            cima = nuevo;
+        }
     }
-    public void LlenarLista(){
+
+    public void LlenarLista() {
         DatosCliente d = new DatosCliente();
-        d.setNombre("Juan");
-        d.setCedula("11582858");
-        d.setTemperatura(38);
-        NodoLista nuevo=new NodoLista();
-      nuevo.setElemento(d);
-      if(esVaciaL()){
-         comienzo=nuevo;
-      }else if(d.getNombre().compareTo(comienzo.getElemento().getNombre())<0){
-         nuevo.setSiguiente(comienzo);
-         comienzo=nuevo;
-      }else if(comienzo.getSiguiente()==null){
-         comienzo.setSiguiente(nuevo);
-      }else{
-         NodoLista aux=comienzo;
-         while((aux.getSiguiente()!=null)
-                 &&(aux.getSiguiente().getElemento().
-                 getNombre()).compareTo(d.getNombre())<0){
-            aux=aux.getSiguiente();
-         }
-         nuevo.setSiguiente(aux.getSiguiente());
-         aux.setSiguiente(nuevo);
-      }
+        d.setNombre(JOptionPane.showInputDialog(null, "Digite su nombre completo:"));
+        d.setCedula(JOptionPane.showInputDialog(null, "Digite su número de cédula:"));
+        d.setTemperatura(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite la temperatura indicada:")));
+        
+    //Agregué el texto del JOptionPane
+        
+        NodoLista nuevo = new NodoLista();
+        nuevo.setElemento(d);
+        if (esVaciaL()) {
+            comienzo = nuevo;
+        } else if (d.getNombre().compareTo(comienzo.getElemento().getNombre()) < 0) {
+            nuevo.setSiguiente(comienzo);
+            comienzo = nuevo;
+        } else if (comienzo.getSiguiente() == null) {
+            comienzo.setSiguiente(nuevo);
+        } else {
+            NodoLista aux = comienzo;
+            while ((aux.getSiguiente() != null)
+                    && (aux.getSiguiente().getElemento().
+                            getNombre()).compareTo(d.getNombre()) < 0) {
+                aux = aux.getSiguiente();
+            }
+            nuevo.setSiguiente(aux.getSiguiente());
+            aux.setSiguiente(nuevo);
+        }
     }
 
 }
