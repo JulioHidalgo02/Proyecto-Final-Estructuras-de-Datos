@@ -4,12 +4,12 @@ public class RefrescosPila {
 
     private String Marca;
     private String Tipo;
-    private int cantidad;
+    private String cantidad;
 
     public RefrescosPila() {
         this.Marca = "";
         this.Tipo = "";
-        this.cantidad = 0;
+        this.cantidad ="";
     }
 
     public String getMarca() {
@@ -28,11 +28,11 @@ public class RefrescosPila {
         this.Tipo = Tipo;
     }
 
-    public int getCantidad() {
+    public String getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 

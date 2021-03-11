@@ -42,9 +42,9 @@ public class SodaFide {
 
     public void LLenarCola() {
         DatosCliente d = new DatosCliente();
-        d.setNombre("Juan");
-        d.setCedula("154841585");
-        d.setTemperatura(37.5);
+        d.setNombre(JOptionPane.showInputDialog(null, "Digite su nombre completo:"));
+        d.setCedula(JOptionPane.showInputDialog(null, "Digite su número de cédula:"));
+        d.setTemperatura(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite la temperatura indicada:")));
         NodoCola nuevo = new NodoCola();
         nuevo.setElemento(d);
         if (esVaciaC()) {
@@ -60,7 +60,7 @@ public class SodaFide {
         RefrescosPila d = new RefrescosPila();
         d.setMarca(JOptionPane.showInputDialog(null, "Digite la marca del refresco:"));
         d.setTipo(JOptionPane.showInputDialog(null, "Digite el tipo de refresco, ya sea gaseoso o natural:"));
-        d.setCantidad(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite el tamaño de la bebida, ya sea 500ml, 1L o 3L:")));
+        d.setCantidad(JOptionPane.showInputDialog(null, "Digite el tamaño de la bebida, ya sea 500ml, 1L o 3L:"));
         NodoPila nuevo = new NodoPila();
         nuevo.setElemento(d);
         if (esVaciaP()) {
@@ -99,5 +99,19 @@ public class SodaFide {
             aux.setSiguiente(nuevo);
         }
     }
+    public void mostrarElementosPila(){
+    if(!esVaciaP()){
+       String s = "";
+       NodoPila aux = cima;
+       while(aux!=null){
+        s = s +"Refresco Marca: " + aux.getElemento().getMarca() + "-- Tipo: " + aux.getElemento().getTipo() + " -- Cantidad: " + aux.getElemento().getCantidad() + "\n ";
+        aux = aux.getSiguiente();
+    }
+       JOptionPane.showMessageDialog(null, "Los Refrescos Disponibles son: \n " + s);
+    }else{
+        JOptionPane.showMessageDialog(null, "No hay Refrescos Disponibles");
+    }
+    
 
+}
 }
