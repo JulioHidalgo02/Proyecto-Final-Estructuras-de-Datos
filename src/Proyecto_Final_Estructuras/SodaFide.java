@@ -9,6 +9,17 @@ public class SodaFide {
     private NodoCola fin;
     private NodoPila cima;
     private NodoLista comienzo;
+    private NodoListaDoblementeEnlazada cabeza;
+    private NodoListaDoblementeEnlazada ultimo;
+    
+    public SodaFide(){
+        this.inicio = null;
+        this.fin = null;
+        this.cima = null;
+        this.comienzo = null;
+        this.cabeza = null;
+        this.ultimo = null;
+    }
 
     private boolean esVaciaC() {
         if (inicio == null) {
@@ -32,6 +43,13 @@ public class SodaFide {
         } else {
             return false;
         }
+    }
+    private boolean esVaciaListaDoblementeEnlazada(){
+       if (cabeza == null) {
+            return true;
+        } else {
+            return false;
+        } 
     }
 
     public void LlenarVector(DatosCliente datos) {
@@ -71,13 +89,7 @@ public class SodaFide {
         }
     }
 
-    public void LlenarLista() {
-        DatosCliente d = new DatosCliente();
-        d.setNombre(JOptionPane.showInputDialog(null, "Digite su nombre completo:"));
-        d.setCedula(JOptionPane.showInputDialog(null, "Digite su número de cédula:"));
-        d.setTemperatura(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite la temperatura indicada:")));
-        
-    //Agregué el texto del JOptionPane
+    public void LlenarLista(DatosCliente d) {
         
         NodoLista nuevo = new NodoLista();
         nuevo.setElemento(d);
@@ -99,6 +111,55 @@ public class SodaFide {
             aux.setSiguiente(nuevo);
         }
     }
+    
+    public void LlenarListaDobleEnlazada(){
+        Comidas c = new Comidas();
+        c.setComida(JOptionPane.showInputDialog(null, "Digite el nombre de la comida"));
+        c.setAcompañamientos(JOptionPane.showInputDialog(null, "Digite los acompañamientos que tiene la comida"));
+        c.setNumeroDecomida(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite el numero de comida")));
+        NodoListaDoblementeEnlazada nuevo = new NodoListaDoblementeEnlazada();
+        nuevo.setDato(c);
+        if(esVaciaListaDoblementeEnlazada()){
+            cabeza = nuevo;
+            ultimo = nuevo;
+            ultimo.setSiguiente(cabeza);
+            cabeza.setAnterior(ultimo);
+        }else if(c.getNumeroDecomida()<cabeza.getDato().getNumeroDecomida()){
+            nuevo.setSiguiente(cabeza);
+            cabeza = nuevo;
+            ultimo.setSiguiente(cabeza);
+            cabeza.setAnterior(ultimo);
+        }else if(c.getNumeroDecomida()>=ultimo.getDato().getNumeroDecomida()){
+            ultimo.setSiguiente(nuevo);
+            ultimo = nuevo;
+            ultimo.setSiguiente(cabeza);
+            cabeza.setAnterior(ultimo);
+        }else{
+            NodoListaDoblementeEnlazada aux = cabeza;
+            while(aux.getSiguiente().getDato().getNumeroDecomida()<c.getNumeroDecomida()){
+                aux = aux.getSiguiente();
+            }
+            nuevo.setSiguiente(aux.getSiguiente());
+            nuevo.setAnterior(aux);
+            aux.setSiguiente(nuevo);
+            nuevo.getSiguiente().setAnterior(nuevo);
+        }
+    }
+    
+    public void copiarColaALista() {
+        if (!esVaciaC()) {
+            NodoCola aux = inicio;
+            while (aux != null) {
+                LlenarLista(aux.getElemento());
+                aux = aux.getSiguiente();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "No se puede copiar, cola vacía!");
+        }
+    }
+    
+    
     public void mostrarElementosPila(){
     if(!esVaciaP()){
        String s = "";
@@ -114,4 +175,38 @@ public class SodaFide {
     
 
 }
+    public void mostarElementosListaDoblementeEnlazada(){
+         String s="";
+       if(!esVaciaListaDoblementeEnlazada()){
+          NodoListaDoblementeEnlazada aux=cabeza;
+          s=s+"# " + aux.getDato().getNumeroDecomida() + "Comida: " + aux.getDato().getComida() + "  Acompañamientos: " + aux.getDato().getAcompañamientos() + " <==> ";
+          aux=aux.getSiguiente();
+          while(aux!=cabeza){
+          s=s+"# " + aux.getDato().getNumeroDecomida() + "Comida: " + aux.getDato().getComida() + "  Acompañamientos: " + aux.getDato().getAcompañamientos() + " <==> ";
+             aux=aux.getSiguiente();
+          }
+          JOptionPane.showMessageDialog(null,
+                  "El menu que tenemos a su disposición es el Siguiente:\n"+s);
+       }else{
+          JOptionPane.showMessageDialog(null,
+                  "No se puede mostrar, lista vacía!");
+       }
+    }
+    public void mostrarLista(){
+        if (!esVaciaL()) {
+            String s = "";
+            NodoLista aux = comienzo;
+            while (aux != null) {
+                s = s + "[" + aux.getElemento().getNombre()+ " " + aux.getElemento().getCedula()+ " "
+                        + aux.getElemento().getTemperatura()+"]<--";
+                aux = aux.getSiguiente();
+            }
+            JOptionPane.showMessageDialog(null,
+                    "La lista contiene:\n" + s);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "No se puede mostrar elementos, lista vacía!");
+
+        }
+    }
 }
