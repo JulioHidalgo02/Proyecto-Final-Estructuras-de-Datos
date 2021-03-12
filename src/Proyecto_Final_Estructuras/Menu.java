@@ -31,7 +31,7 @@ public class Menu {
                 break;
             }
             case 3: {
-
+                s.mostarElementosListaDoblementeEnlazada();
                 mostrarMenu();
                 break;
             }
@@ -61,7 +61,10 @@ public class Menu {
                         "----MENÚ ADMINISTRADOR---\n\n"
                         + "1. Ingresar Refrescos.\n"
                         + "2. Refrescos disponibles.\n"
-                        + "3. Volver al menú."));
+                        + "3. Añadir los platillos que se van servir el dia de hoy.\n"  
+                        + "4. Generar Reporte. \n"
+                        + "5. Mostrar reporte. \n"       
+                        + "6. Volver al menú."));
 
                 switch (opc2) {
                     case 1: {
@@ -73,14 +76,25 @@ public class Menu {
                         break;
                     }
                     case 3: {
-
+                        s.LlenarListaDobleEnlazada();
                         break;
+                    }
+                     case 4: {
+                        s.copiarColaALista();
+                        break;
+                    }
+                    case 5: {
+                        s.mostrarLista();
+                        break;
+                    }
+                    case 6: {
+                        mostrarMenu();
                     }
                     default: {
                         JOptionPane.showMessageDialog(null, "Opcion incorrecta!");
                     }
                 }
-            } while (opc2 != 3);
+            } while (opc2 != 6);
         } else {
             b1 = b1 + 1;
             if (b1 == 3) {
