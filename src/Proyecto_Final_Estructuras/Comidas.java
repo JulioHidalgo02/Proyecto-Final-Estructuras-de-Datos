@@ -5,11 +5,13 @@ public class Comidas {
     private String comida;
     private String acompañamientos;
     private int numeroDecomida;
+    private double precio;
     
     public Comidas(){
         this.comida = "";
         this.acompañamientos = "";
         this.numeroDecomida =0;
+        this.precio = 0.00;
     }
 
     public String getComida() {
@@ -34,6 +36,14 @@ public class Comidas {
 
     public void setNumeroDecomida(int numeroDecomida) {
         this.numeroDecomida = numeroDecomida;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
         
 }

@@ -10,12 +10,12 @@ public class Menu {
     public void mostrarMenu() {
         opc = Integer.parseInt(JOptionPane.showInputDialog(null,
                 "                                    ***BIENVENIDO A SODA FIDE***\n"
-                + "POR RAZONES DE PANDEMIA SOLO PODEMOS ATENDER A 5 PERSONAS \n"
+                + "POR RAZONES DE PANDEMIA SOLO PODEMOS ATENDER A 3 PERSONAS \n"
                 + "AGRADECEMOS SU COMPRENSIÓN!\n \n"
                 + "1. Menú Administrador\n"
                 + "2. Tomar Datos de la persona\n"
                 + "3. Ver Menú\n"
-                + "4. Pedir cuenta\n"
+                + "4. Pedir Comida\n"
                 + "5. Salir de la aplicación\n\n"
                 + "Digite su opción:"));
         switch (opc) {
@@ -36,7 +36,7 @@ public class Menu {
                 break;
             }
             case 4: {
-
+                PedirComida();
                 mostrarMenu();
                 break;
             }
@@ -109,5 +109,10 @@ public class Menu {
 
         }
 
+    }
+    public void PedirComida(){
+        String mensajeFinal;
+        String comida = JOptionPane.showInputDialog("Digite lo que desea comer");
+        s.desapilar(comida);
     }
 }

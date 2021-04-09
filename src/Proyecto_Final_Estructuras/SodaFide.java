@@ -3,7 +3,7 @@ package Proyecto_Final_Estructuras;
 import javax.swing.JOptionPane;
 
 public class SodaFide {
-
+    private int b=0;
     private DatosCliente sorteo[] = new DatosCliente[5];
     private NodoCola inicio;
     private NodoCola fin;
@@ -51,6 +51,10 @@ public class SodaFide {
             return false;
         } 
     }
+     public static int randomWithRange(int min, int max) {
+     int range = (max - min) + 1;
+     return (int) (Math.random() * range) + min;
+}
 
     public void LlenarVector(DatosCliente datos) {
         for (int i = 0; i < sorteo.length; i++) {
@@ -59,12 +63,26 @@ public class SodaFide {
     }
 
     public void LLenarCola() {
+        
+        if(b<2){
         DatosCliente d = new DatosCliente();
         d.setNombre(JOptionPane.showInputDialog(null, "Digite su nombre completo:"));
         d.setCedula(JOptionPane.showInputDialog(null, "Digite su número de cédula:"));
-        d.setTemperatura(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite la temperatura indicada:")));
+        int temperatura = randomWithRange(33, 39); 
+        JOptionPane.showMessageDialog(null, "Su temperatura es: " + temperatura);
+        if( temperatura >= 37){
+            JOptionPane.showMessageDialog(null, "Tiene la temperatura mayor a 37, no puede entrar");
+            Menu m = new Menu();
+            m.mostrarMenu();
+        }else{
+            JOptionPane.showMessageDialog(null, "Bienvenido, pase adelante");
+            b++;
+        }
+        
+        d.setTemperatura(temperatura);
         NodoCola nuevo = new NodoCola();
         nuevo.setElemento(d);
+        
         if (esVaciaC()) {
             inicio = nuevo;
             fin = nuevo;
@@ -72,9 +90,15 @@ public class SodaFide {
             fin.setSiguiente(nuevo);
             fin = nuevo;
         }
+        }else{
+            JOptionPane.showMessageDialog(null, "En este momento estamos en la capacidad maxima de la soda, por lo tanto no te podemos atender");
+        }
+        
     }
 
     public void LLenarPila() {
+        for (int x = 0; x < 3; x++) {
+            
         RefrescosPila d = new RefrescosPila();
         d.setMarca(JOptionPane.showInputDialog(null, "Digite la marca del refresco:"));
         d.setTipo(JOptionPane.showInputDialog(null, "Digite el tipo de refresco, ya sea gaseoso o natural:"));
@@ -87,7 +111,21 @@ public class SodaFide {
             nuevo.setSiguiente(cima);
             cima = nuevo;
         }
+        }
+}
+public void desapilar(String comida){
+    String mensajeFinal = "";
+    
+    if(!esVaciaP()){   
+    mensajeFinal = comida + "\n Refresco:  " + cima.getElemento().getMarca() + " " + cima.getElemento().getTipo() + " " + cima.getElemento().getCantidad();
+        JOptionPane.showMessageDialog(null, "Pronto le traeremos su comida:\n Detalle: " + mensajeFinal);
+        cima = cima.getSiguiente();
+    }else{
+        JOptionPane.showMessageDialog(null, "No se puede mostrar, ya que la pila esta vacia");
+        
     }
+}
+        
 
     public void LlenarLista(DatosCliente d) {
         
@@ -113,10 +151,12 @@ public class SodaFide {
     }
     
     public void LlenarListaDobleEnlazada(){
+        for(int x = 0; x < 3; x++){
         Comidas c = new Comidas();
         c.setComida(JOptionPane.showInputDialog(null, "Digite el nombre de la comida"));
         c.setAcompañamientos(JOptionPane.showInputDialog(null, "Digite los acompañamientos que tiene la comida"));
         c.setNumeroDecomida(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite el numero de comida")));
+        c.setPrecio(Double.parseDouble(JOptionPane.showInputDialog(null, "Digite el precio de la comida")));
         NodoListaDoblementeEnlazada nuevo = new NodoListaDoblementeEnlazada();
         nuevo.setDato(c);
         if(esVaciaListaDoblementeEnlazada()){
@@ -143,6 +183,7 @@ public class SodaFide {
             nuevo.setAnterior(aux);
             aux.setSiguiente(nuevo);
             nuevo.getSiguiente().setAnterior(nuevo);
+        }
         }
     }
     
@@ -179,10 +220,10 @@ public class SodaFide {
          String s="";
        if(!esVaciaListaDoblementeEnlazada()){
           NodoListaDoblementeEnlazada aux=cabeza;
-          s=s+"# " + aux.getDato().getNumeroDecomida() + "Comida: " + aux.getDato().getComida() + "  Acompañamientos: " + aux.getDato().getAcompañamientos() + " <==> ";
+          s=s+"# " + aux.getDato().getNumeroDecomida() + "Comida: " + aux.getDato().getComida() + "  Acompañamientos: " + aux.getDato().getAcompañamientos() +" Precio: ₡" + aux.getDato().getPrecio() + " <==> ";
           aux=aux.getSiguiente();
           while(aux!=cabeza){
-          s=s+"# " + aux.getDato().getNumeroDecomida() + "Comida: " + aux.getDato().getComida() + "  Acompañamientos: " + aux.getDato().getAcompañamientos() + " <==> ";
+          s=s+"# " + aux.getDato().getNumeroDecomida() + "Comida: " + aux.getDato().getComida() + "  Acompañamientos: " + aux.getDato().getAcompañamientos() + " Precio: ₡" + aux.getDato().getPrecio() + " <==> ";
              aux=aux.getSiguiente();
           }
           JOptionPane.showMessageDialog(null,
