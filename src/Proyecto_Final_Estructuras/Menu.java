@@ -55,7 +55,7 @@ public class Menu {
         int contraseña = Integer.parseInt(JOptionPane.showInputDialog("Digite la contraseña:"));
         int opc2 = 0;
         int b1 = b;
-        if (contraseña == 178239) {
+        if (contraseña == 123) {
             do {
                 opc2 = Integer.parseInt(JOptionPane.showInputDialog(null,
                         "----MENÚ ADMINISTRADOR---\n\n"
