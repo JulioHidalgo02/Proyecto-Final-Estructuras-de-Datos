@@ -16,7 +16,8 @@ public class Menu {
                 + "2. Tomar Datos de la persona\n"
                 + "3. Ver Menú\n"
                 + "4. Pedir Comida\n"
-                + "5. Salir de la aplicación\n\n"
+                + "5. Realizar Sorteo \n"         
+                + "6. Salir de la aplicación\n\n"
                 + "Digite su opción:"));
         switch (opc) {
             case 1: {
@@ -41,6 +42,11 @@ public class Menu {
                 break;
             }
             case 5: {
+                s.Sorteo();
+                mostrarMenu();
+                break;
+            }
+            case 6: {
                 System.exit(0);
                 break;
             }

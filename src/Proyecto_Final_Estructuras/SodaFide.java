@@ -64,7 +64,7 @@ public class SodaFide {
 
     public void LLenarCola() {
         
-        if(b<2){
+        if(b<=2){
         DatosCliente d = new DatosCliente();
         d.setNombre(JOptionPane.showInputDialog(null, "Digite su nombre completo:"));
         d.setCedula(JOptionPane.showInputDialog(null, "Digite su número de cédula:"));
@@ -199,6 +199,15 @@ public void desapilar(String comida){
                     "No se puede copiar, cola vacía!");
         }
     }
+    public void copiarColaAVector(){
+        if(!esVaciaC()){
+            NodoCola aux = inicio;
+            while(aux != null){
+                LlenarVector(aux.getElemento());
+                aux = aux.getSiguiente();
+            }
+        }
+    }
     
     
     public void mostrarElementosPila(){
@@ -249,5 +258,10 @@ public void desapilar(String comida){
                     "No se puede mostrar elementos, lista vacía!");
 
         }
+    }
+    public void Sorteo(){
+        copiarColaAVector();
+        JOptionPane.showMessageDialog(null, "A continuación se procederá a dar el ganador del sorteo");
+        JOptionPane.showMessageDialog(null, "El ganador es: " + sorteo[randomWithRange(0, 2)].getNombre() +"!!!\nFelicidades gano, un almuero para dos personas");
     }
 }
