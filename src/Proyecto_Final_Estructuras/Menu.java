@@ -65,35 +65,45 @@ public class Menu {
             do {
                 opc2 = Integer.parseInt(JOptionPane.showInputDialog(null,
                         "----MENÚ ADMINISTRADOR---\n\n"
-                        + "1. Ingresar Refrescos.\n"
-                        + "2. Refrescos disponibles.\n"
-                        + "3. Añadir los platillos que se van servir el dia de hoy.\n"  
-                        + "4. Generar Reporte. \n"
-                        + "5. Mostrar reporte. \n"       
-                        + "6. Volver al menú."));
+                        + "1. Ingresar horarios de trabajadores.\n" 
+                        + "2. Ver los horarios de los trabajadores.\n"         
+                        + "3. Ingresar Refrescos.\n"
+                        + "4. Refrescos disponibles.\n"
+                        + "5. Añadir los platillos que se van servir el dia de hoy.\n"  
+                        + "6. Generar Reporte. \n"
+                        + "7. Mostrar reporte. \n"       
+                        + "8. Volver al menú."));
 
                 switch (opc2) {
                     case 1: {
-                        s.LLenarPila();
+                        s.LlenarLSC();
                         break;
                     }
-                    case 2: {
-                        s.mostrarElementosPila();
+                     case 2: {
+                        s.mostrarElementosLSC();
                         break;
                     }
                     case 3: {
-                        s.LlenarListaDobleEnlazada();
+                        s.LLenarPila();
                         break;
                     }
-                     case 4: {
-                        s.copiarColaALista();
+                    case 4: {
+                        s.mostrarElementosPila();
                         break;
                     }
                     case 5: {
+                        s.LlenarListaDobleEnlazada();
+                        break;
+                    }
+                     case 6: {
+                        s.copiarColaALista();
+                        break;
+                    }
+                    case 7: {
                         s.mostrarLista();
                         break;
                     }
-                    case 6: {
+                    case 8: {
                         mostrarMenu();
                     }
                     default: {
